@@ -35,11 +35,11 @@ namespace Api
             });
 
             services.AddDbContext<RepositoryEFContext>(opt => opt.UseInMemoryDatabase("Todolist"));
-            services.AddScoped<IProductGlobalServices, ProductGlobalServices>();
+            services.AddScoped<IProductServices, ProductServices>();
             services.AddScoped<IProductRepositoryService, ProductRepositoryService>();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IProductRepositoryValidate, ProductRepositoryValidate>();
-            services.AddScoped<IProductGlobalValidation, ProductGlobalValidation>();
+            services.AddScoped<IProductValidation, ProductValidation>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

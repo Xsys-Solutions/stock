@@ -12,29 +12,24 @@ namespace Api.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
-        private readonly IProductGlobalServices _services;
+        private readonly IProductServices _services;
 
-        public ProductController(IProductGlobalServices services)
+        public ProductController(IProductServices services)
         {
             _services = services;
         }
 
-        /// <summary>
-        ///     [HttpGet] Listar produtos
-        /// </summary>
-        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult<List<ProductResponse>>> GetAll()
         {
             try
             {
                 var listResponse = await _services.GetAllAsync();
-                return listResponse.ToList();
+                return Ok(listResponse.ToList());
             }
-            catch (Exception)
+            catch (Exception e)
             {
-
-                throw;
+                return BadRequest(e.Message);
             }
         }
 
@@ -43,8 +38,8 @@ namespace Api.Controllers
         {
             try
             {
-                var response = _services.CreateAsync(model);
-                return await response;
+                var response = await _services.CreateAsync(model);
+                return CreatedAtAction("PostAsync", response);
             }
             catch (Exception e)
             {
