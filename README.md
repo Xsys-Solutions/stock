@@ -6,6 +6,7 @@ Seu desafio é criar dois métodos, um para adicionar produtos e outro para remo
 Fique a vontade para instalar outras bibliotecas, seguir alguma arquitetura ou modificar/melhorar os métodos prontos. 
 O que será avaliado é sua lógica e sua organização do código. 
 
-# Build 
-O projeto foi desenvolvido na plataforma .NET Core, ASP.NET Core.
-Banco de dados em memória (InMemoryDatabase).
+# Build
+O projeto foi desenvolvido na plataforma .NET Core, ASP.NET Core. 
+Banco de dados em memória (InMemoryDatabase). 
+
