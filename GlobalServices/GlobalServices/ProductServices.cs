@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace GlobalServices.GlobalServices
 {
-    public class ProductGlobalServices : IProductGlobalServices
+    public class ProductServices : IProductServices
     {
         private readonly IProductRepositoryService _repositoryService;
-        private readonly IProductGlobalValidation _validation;
+        private readonly IProductValidation _validation;
 
-        public ProductGlobalServices(IProductRepositoryService repositoryService, IProductGlobalValidation validation)
+        public ProductServices(IProductRepositoryService repositoryService, IProductValidation validation)
         {
             _repositoryService = repositoryService;
             _validation = validation;

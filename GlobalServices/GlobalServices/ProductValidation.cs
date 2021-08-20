@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace GlobalServices.GlobalServices
 {
-    public class ProductGlobalValidation : IProductGlobalValidation
+    public class ProductValidation : IProductValidation
     {
         public ICollection<string> Validation(ProductRequest request)
         {
