@@ -1,16 +1,18 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using GlobalServices.GlobalServices;
+using GlobalServices.Interface;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Repositories.Data;
+using Repositories.Stock.Interface;
+using Repositories.Stock.Repository;
+using Repositories.Stock.Service;
+using Repositories.Stock.Validations;
+
 
 namespace Api
 {
@@ -23,7 +25,6 @@ namespace Api
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
 
@@ -32,9 +33,15 @@ namespace Api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Api", Version = "v1" });
             });
+
+            services.AddDbContext<RepositoryEFContext>(opt => opt.UseInMemoryDatabase("Todolist"));
+            services.AddScoped<IProductGlobalServices, ProductGlobalServices>();
+            services.AddScoped<IProductRepositoryService, ProductRepositoryService>();
+            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IProductRepositoryValidate, ProductRepositoryValidate>();
+            services.AddScoped<IProductGlobalValidation, ProductGlobalValidation>();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())

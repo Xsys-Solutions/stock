@@ -1,5 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DTO.Model.Products;
+using GlobalServices.Interface;
+using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Api.Controllers
 {
@@ -7,29 +12,44 @@ namespace Api.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
+        private readonly IProductGlobalServices _services;
 
+        public ProductController(IProductGlobalServices services)
+        {
+            _services = services;
+        }
+
+        /// <summary>
+        ///     [HttpGet] Listar produtos
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<ActionResult<List<ProductResponse>>> GetAll()
+        {
+            try
+            {
+                var listResponse = await _services.GetAllAsync();
+                return listResponse.ToList();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<ActionResult<ProductResponse>> PostAsync(ProductRequest model)
         {
-
-        }
-
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-
-        }
-
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-
+            try
+            {
+                var response = _services.CreateAsync(model);
+                return await response;
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
     }
 }

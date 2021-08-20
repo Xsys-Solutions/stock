@@ -1,40 +1,69 @@
-﻿using EF.Data;
-using Entities.Stock;
+﻿using Entities.Stock;
+using Repositories.Data;
 using Repositories.Stock.Interface;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Repositories.Stock.Repository
 {
     public class ProductRepository : IProductRepository
     {
-        private readonly StockContext _context;
+        //private readonly IDbConnection _context;
+        private readonly RepositoryEFContext _context;
 
-        public ProductRepository(StockContext context)
+        public ProductRepository(RepositoryEFContext context)
         {
             _context = context;
         }
 
-        public Product Add(Product obj)
+        public async Task<Product> CreateAsync(Product obj)
         {
-            //INSERT INTO
-            _context.Add(obj);
-            throw new System.NotImplementedException();
+            try
+            {
+                await _context.AddAsync(obj);
+                await _context.SaveChangesAsync();
+                return obj;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
-        public Product Delete(int id)
+        public async Task<ICollection<Product>> GetAllAsync()
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                var responseProducts = _context.Products;
+                var response =  responseProducts.ToList();
+                return response;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
-        public Product Get(int id)
+        public Task<Product> DeleteAsync(int id)
         {
-            return _context.Products.Find(id);
+            throw new NotImplementedException();
         }
 
-        public Product Update(Product obj)
+        public async Task<Product> GetByCodeAsync(long code)
         {
-            _context.Update(obj);
-            _context.SaveChanges();
-            return obj;
+            throw new NotImplementedException();
+        }
+
+        public async Task<Product> GetByIdAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<Product> UpdateAsync(Product obj)
+        {
+            throw new NotImplementedException();
         }
     }
 }

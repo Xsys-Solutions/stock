@@ -1,11 +1,16 @@
-﻿namespace GlobalServices.Interface
+﻿using DTO.Model.Products;
+using Repositories.Stock.Interface;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace GlobalServices.Interface
 {
-    public interface IGlobalServices<T>
+    public interface IGlobalServices<TRequest, TResponse>
     {
-        T Create(T obj);
-        int Add(T obj);
-        T Update(T obj);
-        void Delete(int id);
-        int Remove(int id);
+        Task<TResponse> CreateAsync(TRequest obj);
+        Task<ICollection<TResponse>> GetAllAsync();
+        Task<string> DeleteAsync(int id);
+        Task<TResponse> UpdateAsync(TRequest obj);
     }
 }

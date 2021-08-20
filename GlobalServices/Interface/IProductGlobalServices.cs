@@ -1,9 +1,8 @@
-﻿using Entities.Stock;
+﻿using DTO.Model.Products;
 
 namespace GlobalServices.Interface
 {
-    public interface IProductGlobalServices : IGlobalServices<Product>
+    public interface IProductGlobalServices : IGlobalServices<ProductRequest, ProductResponse>
     {
-        int CheckAmount(int id);
     }
 }

@@ -1,15 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Entities.Base;
 
 namespace Entities.Stock
 {
-    public class Product
+    public class Product : BaseEntity
     {
-        public int Id { get; set; }
+        public Product()
+        {
+            Code = 0;
+            Description = "";
+            Amount = 0;
+        }
+        public long Code { get; set; }
         public string Description { get; set; }
-        public int Amount { get; set; }
+        public int? Amount { get; set; }
     }
 }

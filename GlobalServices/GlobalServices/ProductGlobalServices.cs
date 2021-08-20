@@ -1,43 +1,55 @@
-﻿using Entities.Stock;
+﻿using DTO.Model.Products;
 using GlobalServices.Interface;
 using Repositories.Stock.Interface;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace GlobalServices.GlobalServices
 {
     public class ProductGlobalServices : IProductGlobalServices
     {
-        private readonly IProductRepositoryService _service;
+        private readonly IProductRepositoryService _repositoryService;
+        private readonly IProductGlobalValidation _validation;
 
-        public ProductGlobalServices(IProductRepositoryService service)
+        public ProductGlobalServices(IProductRepositoryService repositoryService, IProductGlobalValidation validation)
         {
-            _service = service;
-        }
-        public Product Create(Product obj)
-        {
-            throw new System.NotImplementedException();
-        }
-        public Product Update(Product obj)
-        {
-            throw new System.NotImplementedException();
+            _repositoryService = repositoryService;
+            _validation = validation;
         }
 
-        public void Delete(int id)
+        public async Task<ProductResponse> CreateAsync(ProductRequest request)
         {
-            throw new System.NotImplementedException();
-        }
-        public int Add(Product obj)
-        {
-            throw new System.NotImplementedException();
-        }
-        public int Remove(int id)
-        {
-            _service.Remove(id);
-            return _service.Get(id).Amount;
+            try
+            {
+                List<string> errros = _validation.Validation(request).ToList();
+
+                if (errros.Count > 0)
+                    throw new Exception(string.Format("Service validation error!", request));
+                else
+                    return await _repositoryService.CreateAsync(request);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
-        public int CheckAmount(int id)
+        public Task<string> DeleteAsync(int id)
         {
-            return _service.Get(id).Amount;
+            throw new NotImplementedException();
+        }
+
+        public async Task<ICollection<ProductResponse>> GetAllAsync()
+        {
+            var listResponse = await _repositoryService.GetAllAsync();
+            return listResponse.ToList();
+        }
+
+        public Task<ProductResponse> UpdateAsync(ProductRequest obj)
+        {
+            throw new NotImplementedException();
         }
     }
 }
