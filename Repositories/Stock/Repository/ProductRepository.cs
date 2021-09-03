@@ -36,7 +36,7 @@ namespace Repositories.Stock.Repository
             try
             {
                 var responseProducts = _context.Products;
-                var response = responseProducts.ToList();
+                var response = responseProducts.ToList<Product>();
                 return response;
             }
             catch (Exception)
