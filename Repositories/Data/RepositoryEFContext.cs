@@ -12,9 +12,8 @@ namespace Repositories.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Product>().HasData(
-                new { Id = 5, Description = "Danone", Code = 123, Amount = 1 }
+                new { Id = 5, Description = "Danone", Code =(long) 123, Amount = 1 }
             );
         }
-
     }
 }
