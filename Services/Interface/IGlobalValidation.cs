@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace GlobalServices.Interface
+namespace Services.Interface
 {
     public interface IGlobalValidation<TRequest>
     {

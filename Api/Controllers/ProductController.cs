@@ -1,6 +1,6 @@
 ﻿using DTO.Model.Products;
-using GlobalServices.Interface;
 using Microsoft.AspNetCore.Mvc;
+using Services.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +20,7 @@ namespace Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<ProductResponse>>> GetAll()
+        public async Task<ActionResult<List<ProductResponse>>> GetAllAsync()
         {
             try
             {
@@ -39,7 +39,7 @@ namespace Api.Controllers
             try
             {
                 var response = await _services.CreateAsync(model);
-                return CreatedAtAction("PostAsync", response);
+                return Created("PostAsync", response);
             }
             catch (Exception e)
             {

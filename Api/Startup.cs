@@ -1,5 +1,3 @@
-using GlobalServices.GlobalServices;
-using GlobalServices.Interface;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -12,7 +10,8 @@ using Repositories.Stock.Interface;
 using Repositories.Stock.Repository;
 using Repositories.Stock.Service;
 using Repositories.Stock.Validations;
-
+using Services.GlobalServices;
+using Services.Interface;
 
 namespace Api
 {
@@ -52,11 +51,8 @@ namespace Api
             }
 
             app.UseHttpsRedirection();
-
             app.UseRouting();
-
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

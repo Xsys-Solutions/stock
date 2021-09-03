@@ -1,6 +1,6 @@
 ﻿using DTO.Model.Products;
 
-namespace GlobalServices.Interface
+namespace Services.Interface
 {
     public interface IProductValidation : IGlobalValidation<ProductRequest>
     {

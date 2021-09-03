@@ -10,7 +10,6 @@ namespace Repositories.Stock.Repository
 {
     public class ProductRepository : IProductRepository
     {
-        //private readonly IDbConnection _context;
         private readonly RepositoryEFContext _context;
 
         public ProductRepository(RepositoryEFContext context)
@@ -37,7 +36,7 @@ namespace Repositories.Stock.Repository
             try
             {
                 var responseProducts = _context.Products;
-                var response =  responseProducts.ToList();
+                var response = responseProducts.ToList();
                 return response;
             }
             catch (Exception)

@@ -3,7 +3,6 @@ using Entities.Stock;
 using Repositories.Stock.Interface;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Repositories.Stock.Service

@@ -1,12 +1,12 @@
 ﻿using DTO.Model.Products;
-using GlobalServices.Interface;
 using Repositories.Stock.Interface;
+using Services.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace GlobalServices.GlobalServices
+namespace Services.GlobalServices
 {
     public class ProductServices : IProductServices
     {
